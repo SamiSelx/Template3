@@ -2,8 +2,6 @@
 
 let box = document.querySelectorAll(".event-date .box-date h3");
 
-
-
 let second = setInterval(countdown, 1000, box[0]);
 let minut = setInterval(countdown , 59000 , box[0]);
 
@@ -79,11 +77,11 @@ btnUp.onclick = function () {
 //     console.log('hey');
 // }
 
-scrollTo({
-     top:10,
-    left : 0,
-    behavior: "smooth"
-});
+// scrollTo({
+//     top: 10,
+//     left : 0,
+//     behavior: "smooth"
+// });
 
 // let count = setInterval(counter , 10 ,elem); 
 // function counter (elem){
@@ -115,3 +113,90 @@ scrollTo({
     
 // }
 
+
+
+let regEmail = /^\w+[^\^-\W]@\w+\.\w{2,3}$/ig
+let regName = /^[A-Z]\w+$/ig
+let regPhone = /^0\d{9}$/g
+// console.log(regEmail.test("samisdqdq@gmail.com"))
+// console.log(regEmail.test("ssaami@gmail.com"))
+// console.log(regEmail.test("sami@gmail.com"))
+// console.log(regEmail.test("sami@gmail.com"))
+let inputName = document.querySelectorAll(".login-content form input")[0]
+let inputEmail = document.querySelectorAll(".login-content form input")[1]
+let inputPhone = document.querySelectorAll(".login-content form input")[2]
+
+var validName = false;
+var validPhone = false;
+var validEmail = false;
+inputName.onblur = function(){
+    validName = regName.test(this.value);
+    check(validName,this)
+    regName.test(this.value)
+}
+inputName.addEventListener("input",function(){
+    validName = regName.test(this.value);
+    check(validName,this)
+    regName.test(this.value)
+})
+//**********************//
+// 2 methode pour changes
+
+ inputEmail.onblur = function(){
+    validEmail = regEmail.test(this.value);
+    check(validEmail,this)
+    regEmail.test(this.value)
+
+}
+
+inputEmail.addEventListener("input",function(){
+    validEmail = regEmail.test(this.value);
+    check(validEmail,this)
+    regEmail.test(this.value)
+})
+
+
+//**********************//
+inputPhone.onblur = function(){
+    validPhone = regPhone.test(this.value);
+    check(validPhone,this)
+    regPhone.test(this.value)
+}
+inputPhone.addEventListener("input",function(){
+    validPhone = regPhone.test(this.value);
+    check(validPhone,this)
+    regPhone.test(this.value)
+})
+
+//**********************//
+
+function check(valid,input){
+    if(valid){
+        input.classList.remove("fail")
+        input.classList.add("succes")
+            
+    }else{
+        input.classList.add("fail")
+        input.classList.remove("succes")
+            
+    }
+        
+}
+
+document.querySelector(".login-content form").onsubmit = function(){
+    
+    if(!(validName && validPhone && validEmail)){
+        if(!validName){
+            inputName.classList.add("submit-fail")
+            
+        }
+        if(!validEmail){
+            inputEmail.classList.add("submit-fail")
+        }
+        if(!validPhone){
+            inputPhone.classList.add("submit-fail")
+        }
+        
+        return false
+    }
+}
