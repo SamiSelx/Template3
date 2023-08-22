@@ -1,25 +1,24 @@
 // countdown
 
-let box = document.querySelectorAll(".event-date .box-date h3");
+let boxDate = document.querySelectorAll(".event-date .box-date h3");
+let eventDate = new Date("01-01-2024").getTime();
+let counter = setInterval(()=>{
+    let seconds = Math.floor((eventDate -  Date.now()) /1000%60);
+    let minutes = Math.floor((eventDate -  Date.now()) /1000/60%60);
+    let hours = Math.floor((eventDate -  Date.now()) /1000/60/60%24)
+    let days = Math.floor((eventDate -  Date.now()) /1000/60/60/24)
 
-let second = setInterval(countdown, 1000, box[0]);
-let minut = setInterval(countdown , 59000 , box[0]);
-
-function countdown(boxDate) {
-    boxDate.innerHTML -= 1;
-    if(boxDate.innerHTML <= 9){
-        boxDate.innerHTML = `0${boxDate.innerHTML}`; 
+    boxDate[0].innerHTML = days<10? "0" + days : days;
+    boxDate[1].innerHTML = hours<10?  "0" + hours : hours;
+    boxDate[2].innerHTML = minutes<10? "0" + minutes  : minutes;
+    boxDate[3].innerHTML = seconds<10? "0" + seconds : seconds;
+    if(eventDate - Date.now() === 0){
+        clearInterval(counter);
     }
-    if(boxDate.innerHTML === 1){
-        boxDate.innerHTML = 59;
-        console.log(boxDate.innerHTML)
-        
-    }
+},1000)
 
-}
+
 let prog = document.getElementsByClassName("progress");
-
-
 
 let stats = document.querySelectorAll(".stats-box");
 
