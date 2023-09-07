@@ -1,4 +1,4 @@
-// countdown
+// countdown Event
 
 let boxDate = document.querySelectorAll(".event-date .box-date h3");
 let eventDate = new Date("01-01-2024").getTime();
@@ -27,34 +27,59 @@ let elem2= Number(stats[1].children[1].innerHTML);
 let elem3= Number(stats[2].children[1].innerHTML);
 let elem4= Number(stats[3].children[1].innerHTML);
 let elem =[elem1,elem2,elem3,elem4];
-
+console.log(elem)
 for (i=0;i<4;i++){
     stats[i].children[1].innerHTML = 0;
 }
+
 let btnUp = document.getElementById("btn-up");
-console.log(btnUp)
+
+
 window.onscroll = function() {
-    if(scrollY >= 11618){
+
+    //Stats
+
+    if(scrollY >= 11574){
+
          setInterval(() => {
-            for(let i=0;i<3;i++){
-                if(elem[i] !== Number(stats[i].children[1].innerHTML)){
-                    stats[i].children[1].innerHTML = Number(stats[i].children[1].innerHTML) + 1;
-                }
+            // for(let i=0;i<3;i++){
+            //     if(elem[i] !== Number(stats[i].children[1].innerHTML)){
+            //         stats[i].children[1].innerHTML = Number(stats[i].children[1].innerHTML) + 1;
+            //     }
+            // }
+            if(elem[0] !== Number(stats[0].children[1].innerHTML)){
+                stats[0].children[1].innerHTML = Number(stats[0].children[1].innerHTML) + 1;
             }
-        }, 233);
+
+        }, 167);
+        setInterval(()=>{
+            if(elem[1] !== Number(stats[1].children[1].innerHTML)){
+                stats[1].children[1].innerHTML = Number(stats[1].children[1].innerHTML) + 1;
+            }
+        },185)
+        setInterval(()=>{
+            if(elem[2] !== Number(stats[2].children[1].innerHTML)){
+                stats[2].children[1].innerHTML = Number(stats[2].children[1].innerHTML) + 1;
+            }
+        },200)
         setInterval(() =>{
             if(elem[3] !== Number(stats[3].children[1].innerHTML)){
                 stats[3].children[1].innerHTML = Number(stats[3].children[1].innerHTML) + 1;
             }
-        },70)
+        },50)
         
     }
+
+    //progress Bar
+
     if(scrollY >= 6864 ){
         for(i=0;i<=3;i++){
             prog[i].classList.add("progress2");
         }
     }
-    
+
+    // Scroll Btn Up
+
     if(scrollY >= 500){
         btnUp.style.display = "block";
     }else{
@@ -117,10 +142,6 @@ btnUp.onclick = function () {
 let regEmail = /^\w+[^\^-\W]@\w+\.\w{2,3}$/ig
 let regName = /^[A-Z]\w+$/ig
 let regPhone = /^0\d{9}$/g
-// console.log(regEmail.test("samisdqdq@gmail.com"))
-// console.log(regEmail.test("ssaami@gmail.com"))
-// console.log(regEmail.test("sami@gmail.com"))
-// console.log(regEmail.test("sami@gmail.com"))
 let inputName = document.querySelectorAll(".login-content form input")[0]
 let inputEmail = document.querySelectorAll(".login-content form input")[1]
 let inputPhone = document.querySelectorAll(".login-content form input")[2]
@@ -181,21 +202,28 @@ function check(valid,input){
     }
         
 }
-
+let formP = document.querySelector(".login-content form")
 document.querySelector(".login-content form").onsubmit = function(){
-    
+    formP.remove()
     if(!(validName && validPhone && validEmail)){
         if(!validName){
-            inputName.classList.add("submit-fail")
+            inputName.classList.add("fail-animation")
             
-        }
+        }else{
+            inputName.classList.remove("fail-animation")
+        } 
         if(!validEmail){
-            inputEmail.classList.add("submit-fail")
+            inputEmail.classList.add("fail-animation")
+        }else{
+            inputEmail.classList.remove("fail-animation")
         }
         if(!validPhone){
-            inputPhone.classList.add("submit-fail")
+            inputPhone.classList.add("fail-animation")
+        }else{
+            inputPhone.classList.remove("fail-animation")
         }
-        
-        return false
+        document.querySelector(".login-content").appendChild(formP)
+        return false;
     }
+    document.querySelector(".login-content").appendChild(formP)
 }
